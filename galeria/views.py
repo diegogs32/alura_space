@@ -1,18 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 # Create your views here.
+from galeria.models import Fotografia
 
-dados = {
-    1: {"nome": "Nebulosa de Carina", "legenda":"webbtelescope.org / NASA / James Webb" },
-    2: {"nome": "Galáxia NGC 1079", "legenda": "nasa.org  / NASA  / Hubble"}
-}
 
 def index(request):
+    fotografias = Fotografia.objects.all()
+    return render(request, 'galeria/index.html', {"cards" : fotografias})
 
-    dados = {
-    1: {"nome": "Nebulosa de Carina", "legenda":"webbtelescope.org / NASA / James Webb" },
-    2: {"nome": "Galáxia NGC 1079", "legenda": "nasa.org  / NASA  / Hubble"}
-}
-    return render(request, 'galeria/index.html', {"cards" : dados})
-
-def imagem(request):
-    return render(request, 'galeria/imagem.html')
+def imagem(request, foto_id):
+    fotografia = get_object_or_404(Fotografia, pk=foto_id)
+    return render(request, 'galeria/imagem.html', {"fotografia": fotografia})
