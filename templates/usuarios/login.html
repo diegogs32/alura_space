@@ -33,14 +33,23 @@
         </header>
         <main class="principal">
             <section class="menu-lateral">
+                {% for message in messages %}
+                <div class="alert alert-primary">
+                    <p id="messages">{{ message }}</p>
+                </div>
+                {% endfor %}
                 <nav class="menu-lateral__navegacao">
                     <a href="{% url 'index' %}"><img src="{% static '/assets/ícones/1x/Home - ativo.png' %}"> Home</a>
                     <a href="{% url 'login' %}"><img src="{% static '/assets/ícones/1x/Mais vistas - inativo.png' %}"> Login</a>
                     <a href="{% url 'cadastro' %}"><img src="{% static '/assets/ícones/1x/Novas - inativo.png' %}"> Cadastrar</a>
                     <a href="#"><img src="{% static '/assets/ícones/1x/Surpreenda-me - inativo.png' %}"> Logout</a>
                 </nav>
+                
+
             </section>
+            
             <section class="galeria" style="margin-left: 5em">
+                
                 <form action="{% url 'login' %}" method="POST">
                     {% csrf_token %}
                     <div class="row">
@@ -51,7 +60,7 @@
                         </div>
                         {% endfor %}
                         </div>
-                        <div><button type="submit" class="btn btn-success col-12 style="padding: top 5px;>Cadastrar</button></div>
+                        <div><button type="submit" class="btn btn-success col-12 style="padding: top 5px;>Entrar</button></div>
                     </div>
                 </form>
             </section>
